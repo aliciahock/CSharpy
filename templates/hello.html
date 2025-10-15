@@ -1,0 +1,50 @@
+<!doctype html>
+<head>
+    <title>CSharpy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<html>
+<style>
+    pre {
+        font-size: inherit;
+        color: blue;
+        border: solid;
+        padding: initial;
+        font-family: inherit;
+        white-space: pre-wrap;
+    }
+</style>
+   <body>
+     <main>
+      <pre>
+        <label for="name" class="form-label fw-bold fs-5">CSharpy Personalised Coding Tutor</label>
+        {{response_text}}
+      </pre>
+      <form method="post" action="{{url_for('hello')}}">
+        <label for="name" class="form-label fw-bold fs-5">Lesson</label>
+        <select name="lesson" method="GET" action="/">
+          <option value="{{lessons_array[0]}}" selected>{{lessons_array[0]}}</option>
+          {% for lesson in lessons_array[1:] %}
+          <option value="{{lesson}}" {% if previous_lesson == lesson %} selected {% endif %}>{{lesson}}</option>
+          {% endfor %}
+        </select>
+        <label for="name" class="form-label fw-bold fs-5">Exercise</label>
+        <select name="exercise" method="GET" action="/">
+          <option value="{{exercises_array[0]}}" selected>{{exercises_array[0]}}</option>
+          {% for exercise in exercises_array[1:] %}
+          <option value="{{exercise}}" {% if previous_exercise == exercise %} selected {% endif %}>{{exercise}}</option>
+          {% endfor %}
+        </select>
+        <label for="name" class="form-label fw-bold fs-5">Enter your program        </label>
+        <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+        <p>
+          <textarea name="Program" id="Program" rows="30" cols="120">{{Program}}</textarea>        
+        </p>
+        <div class="px-4 py-3 my-2 text-center"></div>
+          <a href="https://csharpy.azurewebsites.net/" class="btn btn-primary btn-lg px-4 gap-3">Back home</a>
+        </div>       
+      </form>     
+     </main>      
+   </body>
+</html>
